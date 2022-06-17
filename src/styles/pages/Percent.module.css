@@ -1,0 +1,13 @@
+.article {
+}
+
+.article div label span.text {
+  display: inline-block;
+  width: 120px;
+}
+
+.article div label span.warring {
+  display: inline-block;
+  width: 100px;
+  color: red;
+}
