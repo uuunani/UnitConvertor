@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalculator, faPercent } from '@fortawesome/free-solid-svg-icons';
+import styles from './assets/css/App.module.css';
 
-import styles from './styles/App.module.css';
-
-import Introduce from './pages/Introduce';
 import Percent from './pages/Percent';
 
 function App() {
@@ -11,18 +11,23 @@ function App() {
     <BrowserRouter>
       <div className={styles.app}>
         <header className={styles.header}>
-          <h1>단위 변환기</h1>
+          <FontAwesomeIcon icon={faCalculator} className={styles.logo} />
+          <h1 className={styles.title}>간편 계산기</h1>
         </header>
         <section className={styles.body_wrap}>
           <nav className={styles.main_nav}>
             <ul>
-              <Link to="percent">퍼센트</Link>
-              <li>2</li>
+              <li>
+                <Link to="percent" className={styles.link}>
+                  <FontAwesomeIcon icon={faPercent} className={styles.icon} />
+                  <span className={styles.text}>퍼센트 계산기</span>
+                </Link>
+              </li>
             </ul>
           </nav>
           <div className={styles.content_wrap}>
             <Routes>
-              <Route path="/" element={<Introduce />} />
+              <Route path="/" element={<Percent />} />
               <Route path="percent" element={<Percent />} />
             </Routes>
           </div>

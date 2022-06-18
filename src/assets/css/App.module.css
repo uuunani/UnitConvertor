@@ -11,6 +11,7 @@ body {
 }
 
 .header {
+  display: flex;
   position: fixed;
   left: 0;
   top: 0;
@@ -20,6 +21,15 @@ body {
   color: white;
   align-items: center;
   padding-left: 0.5rem;
+}
+
+.header .logo {
+  width: 1.5rem;
+  height: 100%;
+}
+
+.header .title {
+  margin-left: 0.5rem;
 }
 
 .body_wrap {
@@ -34,6 +44,26 @@ body {
 .main_nav {
   flex: 1;
   background-color: gray;
+}
+
+.main_nav ul {
+  list-style: none;
+  padding-left: 0.5rem;
+}
+
+.main_nav ul li {
+  margin-top: 0.5rem;
+}
+.main_nav ul li .link {
+  text-decoration: none;
+  color: black;
+}
+
+.main_nav ul li .link .icon {
+}
+
+.main_nav ul li .link .text {
+  margin-left: 0.5rem;
 }
 
 .content_wrap {

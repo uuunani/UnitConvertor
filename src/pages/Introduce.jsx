@@ -1,6 +1,6 @@
 import React from 'react';
 
-import styles from '../styles/pages/Main.module.css';
+import styles from '../assets/css/pages/Introduce.module.css';
 
 function Introduce() {
   return (

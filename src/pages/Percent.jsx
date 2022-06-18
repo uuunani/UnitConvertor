@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 
-import styles from '../styles/pages/Percent.module.css';
+import styles from '../assets/css/pages/Percent.module.css';
 
 import calc from '../utils/calcurate';
 
@@ -87,7 +87,7 @@ function Percent() {
         <br />
         <br />
         <label htmlFor="idMinusAmt">
-          <span className={styles.text}>결과 뺀 금액</span>
+          <span className={styles.text}>결과를 뺀 금액</span>
           <span id="idMinusAmt">
             {minusAmt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
           </span>
@@ -95,7 +95,7 @@ function Percent() {
         <br />
         <br />
         <label htmlFor="idPlusAmt">
-          <span className={styles.text}>결과 더한 금액</span>
+          <span className={styles.text}>결과를 더한 금액</span>
           <span id="idPlusAmt">
             {plusAmt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
           </span>
