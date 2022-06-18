@@ -11,9 +11,14 @@
   padding: 0.6rem 1rem;
 }
 
-.article div label span.text {
+.article div label span.input_text {
   display: inline-block;
   width: 120px;
+}
+
+.article div label span.text {
+  display: inline-block;
+  width: 180px;
 }
 
 .article div label span.warring {

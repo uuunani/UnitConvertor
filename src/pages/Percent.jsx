@@ -54,7 +54,7 @@ function Percent() {
       <div>
         <br />
         <label htmlFor="idBaseAmt">
-          <span className={styles.text}>전체금액</span>
+          <span className={styles.input_text}>전체값</span>
           <input
             type="number"
             id="idBaseAmt"
@@ -65,7 +65,7 @@ function Percent() {
         <br />
         <br />
         <label htmlFor="idPercent">
-          <span className={styles.text}>%</span>
+          <span className={styles.input_text}>비율 (%)</span>
           <input
             type="number"
             id="idPercent"
@@ -76,7 +76,7 @@ function Percent() {
         <br />
         <br />
         <label htmlFor="idPercentAmt">
-          <span className={styles.text}>금액</span>
+          <span className={styles.input_text}>계산값</span>
           <input
             type="number"
             ref={refPercentAmt}
@@ -87,7 +87,7 @@ function Percent() {
         <br />
         <br />
         <label htmlFor="idMinusAmt">
-          <span className={styles.text}>결과를 뺀 금액</span>
+          <span className={styles.text}>비율(%)만큼 감소한 값</span>
           <span id="idMinusAmt">
             {minusAmt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
           </span>
@@ -95,7 +95,7 @@ function Percent() {
         <br />
         <br />
         <label htmlFor="idPlusAmt">
-          <span className={styles.text}>결과를 더한 금액</span>
+          <span className={styles.text}>비율(%)만큼 증가한 값</span>
           <span id="idPlusAmt">
             {plusAmt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
           </span>
