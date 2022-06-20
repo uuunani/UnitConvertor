@@ -18,11 +18,13 @@ function App() {
             <ul>
               <li>
                 <Link to="percent" className={styles.link}>
+                  <i className="fa-solid fa-percent" />
                   <span className={styles.text}>퍼센트 계산기</span>
                 </Link>
               </li>
               <li>
                 <Link to="area" className={styles.link}>
+                  <i className="fa-solid fa-clone" />
                   <span className={styles.text}>면적 계산기</span>
                 </Link>
               </li>
@@ -37,7 +39,7 @@ function App() {
           </div>
         </section>
         <footer className={styles.footer}>
-          <p>Copyright 2022 All Reserved UNANI&apos;s</p>
+          <p>Copyright 2022 All Reserved</p>
         </footer>
       </div>
     </BrowserRouter>
