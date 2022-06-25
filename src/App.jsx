@@ -4,6 +4,8 @@ import styles from './assets/css/App.module.css';
 
 import Percent from './pages/Percent';
 import Area from './pages/Area';
+import DataSize from './pages/DataSize';
+import Time from './pages/Time';
 
 function App() {
   return (
@@ -28,6 +30,12 @@ function App() {
                   <span className={styles.text}>면적 계산기</span>
                 </Link>
               </li>
+              <li>
+                <Link to="datasize" className={styles.link}>
+                  <i className="fa-solid fa-clone" />
+                  <span className={styles.text}>데이터사이즈 계산기</span>
+                </Link>
+              </li>
             </ul>
           </nav>
           <div className={styles.content_wrap}>
@@ -35,6 +43,8 @@ function App() {
               <Route path="/" element={<Percent />} />
               <Route path="percent" element={<Percent />} />
               <Route path="area" element={<Area />} />
+              <Route path="datasize" element={<DataSize />} />
+              <Route path="time" element={<Time />} />
             </Routes>
           </div>
         </section>

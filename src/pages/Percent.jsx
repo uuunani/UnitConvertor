@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 
 import styles from '../assets/css/pages/Percent.module.css';
 
-import calc from '../utils/calcurate';
+import calc from '../utils/calculate.percent';
 
 function Percent() {
   const [minusAmt, setMinusAmt] = useState(0);
