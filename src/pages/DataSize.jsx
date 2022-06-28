@@ -109,27 +109,27 @@ function DataSize() {
     }
 
     // 입력값 byte 값으로 변환
-    switch (refSelIn.current.value) {
+    switch (procSelIn.current.value) {
       case 'bit':
-        byte = dataSize.bitToByte(refIptIn.current.value);
+        byte = dataSize.bitToByte(procIptIn.current.value);
         break;
       case 'KB':
-        byte = dataSize.kbToByte(refIptIn.current.value);
+        byte = dataSize.kbToByte(procIptIn.current.value);
         break;
       case 'MB':
-        byte = dataSize.mbToByte(refIptIn.current.value);
+        byte = dataSize.mbToByte(procIptIn.current.value);
         break;
       case 'GB':
-        byte = dataSize.gbToByte(refIptIn.current.value);
+        byte = dataSize.gbToByte(procIptIn.current.value);
         break;
       case 'TB':
-        byte = dataSize.tbToByte(refIptIn.current.value);
+        byte = dataSize.tbToByte(procIptIn.current.value);
         break;
       case 'PB':
-        byte = dataSize.pbToByte(refIptIn.current.value);
+        byte = dataSize.pbToByte(procIptIn.current.value);
         break;
       case 'EB':
-        byte = dataSize.ebToByte(refIptIn.current.value);
+        byte = dataSize.ebToByte(procIptIn.current.value);
         break;
       default:
         byte = 0;
@@ -147,7 +147,7 @@ function DataSize() {
     result.eb = dataSize.byteToEB(byte);
 
     // 화면 출력
-    switch (refSelOut.current.value) {
+    switch (procSelOut.current.value) {
       case 'bit':
         procIptOut.current.value = result.bit;
         break;
