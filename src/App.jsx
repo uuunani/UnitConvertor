@@ -15,29 +15,31 @@ function App() {
           <i className="fa-solid fa-calculator fa-xl" />
           <h1 className={styles.title}>간편 계산기</h1>
         </header>
-        <section className={styles.body_wrap}>
+        <section className={styles.navi_wrap}>
           <nav className={styles.main_nav}>
             <ul>
               <li>
                 <Link to="percent" className={styles.link}>
                   <i className="fa-solid fa-percent" />
-                  <span className={styles.text}>퍼센트 계산기</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="area" className={styles.link}>
-                  <i className="fa-solid fa-clone" />
-                  <span className={styles.text}>면적 계산기</span>
+                  <span className={styles.text}>퍼센트</span>
                 </Link>
               </li>
               <li>
                 <Link to="datasize" className={styles.link}>
                   <i className="fa-solid fa-clone" />
-                  <span className={styles.text}>데이터사이즈 계산기</span>
+                  <span className={styles.text}>데이터</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="area" className={styles.link}>
+                  <i className="fa-solid fa-clone" />
+                  <span className={styles.text}>면적</span>
                 </Link>
               </li>
             </ul>
           </nav>
+        </section>
+        <section className={styles.body_wrap}>
           <div className={styles.content_wrap}>
             <Routes>
               <Route path="/" element={<Percent />} />

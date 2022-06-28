@@ -183,9 +183,64 @@ function DataSize() {
     calculate(event.target.id);
   };
 
+  let detailView = null;
+  if (dispDataSize.b > 0) {
+    detailView = (
+      <ul>
+        <li>
+          <span className={styles.num}>{dispDataSize.bit}</span>
+          <span className={styles.text}>
+            {units[0].name}&nbsp;({units[0].unit})
+          </span>
+        </li>
+        <li>
+          <span className={styles.num}>{dispDataSize.b}</span>
+          <span className={styles.text}>
+            {units[1].name}&nbsp;({units[1].unit})
+          </span>
+        </li>
+        <li>
+          <span className={styles.num}>{dispDataSize.kb}</span>
+          <span className={styles.text}>
+            {units[2].name}&nbsp;({units[2].unit})
+          </span>
+        </li>
+        <li>
+          <span className={styles.num}>{dispDataSize.mb}</span>
+          <span className={styles.text}>
+            {units[3].name}&nbsp;({units[3].unit})
+          </span>
+        </li>
+        <li>
+          <span className={styles.num}>{dispDataSize.gb}</span>
+          <span className={styles.text}>
+            {units[4].name}&nbsp;({units[4].unit})
+          </span>
+        </li>
+        <li>
+          <span className={styles.num}>{dispDataSize.tb}</span>
+          <span className={styles.text}>
+            {units[5].name}&nbsp;({units[5].unit})
+          </span>
+        </li>
+        <li>
+          <span className={styles.num}>{dispDataSize.pb}</span>
+          <span className={styles.text}>
+            {units[6].name}&nbsp;({units[6].unit})
+          </span>
+        </li>
+        <li>
+          <span className={styles.num}>{dispDataSize.eb}</span>
+          <span className={styles.text}>
+            {units[7].name}&nbsp;({units[7].unit})
+          </span>
+        </li>
+      </ul>
+    );
+  }
+
   return (
     <article>
-      <h1>데이터 사이즈 변환</h1>
       <div className={styles.process_wrap}>
         <div className={styles.input_wrap}>
           <input
@@ -240,58 +295,7 @@ function DataSize() {
           </select>
         </div>
       </div>
-      <div className={styles.detail_wrap}>
-        <ul>
-          <li>
-            <span className={styles.num}>{dispDataSize.bit}</span>
-            <span className={styles.text}>
-              {units[0].name}&nbsp;({units[0].unit})
-            </span>
-          </li>
-          <li>
-            <span className={styles.num}>{dispDataSize.b}</span>
-            <span className={styles.text}>
-              {units[1].name}&nbsp;({units[1].unit})
-            </span>
-          </li>
-          <li>
-            <span className={styles.num}>{dispDataSize.kb}</span>
-            <span className={styles.text}>
-              {units[2].name}&nbsp;({units[2].unit})
-            </span>
-          </li>
-          <li>
-            <span className={styles.num}>{dispDataSize.mb}</span>
-            <span className={styles.text}>
-              {units[3].name}&nbsp;({units[3].unit})
-            </span>
-          </li>
-          <li>
-            <span className={styles.num}>{dispDataSize.gb}</span>
-            <span className={styles.text}>
-              {units[4].name}&nbsp;({units[4].unit})
-            </span>
-          </li>
-          <li>
-            <span className={styles.num}>{dispDataSize.tb}</span>
-            <span className={styles.text}>
-              {units[5].name}&nbsp;({units[5].unit})
-            </span>
-          </li>
-          <li>
-            <span className={styles.num}>{dispDataSize.pb}</span>
-            <span className={styles.text}>
-              {units[6].name}&nbsp;({units[6].unit})
-            </span>
-          </li>
-          <li>
-            <span className={styles.num}>{dispDataSize.eb}</span>
-            <span className={styles.text}>
-              {units[7].name}&nbsp;({units[7].unit})
-            </span>
-          </li>
-        </ul>
-      </div>
+      <div className={styles.detail_wrap}>{detailView}</div>
     </article>
   );
 }

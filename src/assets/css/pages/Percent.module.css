@@ -1,4 +1,9 @@
-.article {
+article {
+  width: 100%;
+  max-width: 768px;
+  margin: auto;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 
 .article div label input {
