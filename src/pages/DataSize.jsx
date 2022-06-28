@@ -2,6 +2,8 @@ import React, { useState, useRef } from 'react';
 
 import dataSize from '../utils/calculate.datasize';
 
+import styles from '../assets/css/pages/DataSize.module.css';
+
 function DataSize() {
   const defaultIn = 'MB';
   const defaultOut = 'GB';
@@ -29,12 +31,13 @@ function DataSize() {
   });
 
   // Ref 셋팅
-  const refInputIn = useRef();
-  const refInputOut = useRef();
+  const refIptIn = useRef();
+  const refIptOut = useRef();
 
-  const refSelectIn = useRef();
-  const refSelectOut = useRef();
+  const refSelIn = useRef();
+  const refSelOut = useRef();
 
+  // state 리셋 함수
   const resetState = () => {
     const reset = { ...dispDataSize };
     reset.bit = 0;
@@ -46,6 +49,21 @@ function DataSize() {
     reset.pb = 0;
     reset.eb = 0;
     setDispDataSize(reset);
+  };
+
+  // INPUT 태그 Validation 함수
+  const isNumberValid = evt => {
+    const inputVal = evt.target.value;
+
+    // 소수점 다섯자리수까지만 입력 허용
+    const regexp = /^\d*(\.\d{0,5})?$/;
+    if (inputVal.search(regexp) === -1) {
+      if (evt.target.id === 'idIptIn') {
+        refIptIn.current.value = inputVal.substr(0, inputVal.length - 1);
+      } else if (evt.target.id === 'idIptOut') {
+        refIptOut.current.value = inputVal.substr(0, inputVal.length - 1);
+      }
+    }
   };
 
   const calculate = (_id, _value = null) => {
@@ -61,30 +79,30 @@ function DataSize() {
     let byte = 0;
 
     // 이벤트 동작에 따른 처리
-    let refSelIn = null;
-    let refSelOut = null;
-    let refIptIn = null;
-    let refIptOut = null;
+    let procSelIn = null;
+    let procSelOut = null;
+    let procIptIn = null;
+    let procIptOut = null;
 
-    if (_id === 'idSelectIn' || _id === 'idIn') {
-      refSelIn = refSelectIn;
-      refSelOut = refSelectOut;
-      refIptIn = refInputIn;
-      refIptOut = refInputOut;
+    if (_id === 'idSelIn' || _id === 'idSelOut' || _id === 'idIptIn') {
+      procSelIn = refSelIn;
+      procSelOut = refSelOut;
+      procIptIn = refIptIn;
+      procIptOut = refIptOut;
     }
-    if (_id === 'idSelectOut' || _id === 'idOut') {
-      refSelIn = refSelectOut;
-      refSelOut = refSelectIn;
-      refIptIn = refInputOut;
-      refIptOut = refInputIn;
+    if (_id === 'idIptOut') {
+      procSelIn = refSelOut;
+      procSelOut = refSelIn;
+      procIptIn = refIptOut;
+      procIptOut = refIptIn;
     }
 
     // 의도치 않은 상황
     if (
-      refSelIn === null ||
-      refSelOut === null ||
-      refIptIn === null ||
-      refIptOut === null
+      procSelIn === null ||
+      procSelOut === null ||
+      procIptIn === null ||
+      procIptOut === null
     ) {
       resetState();
       return;
@@ -117,9 +135,6 @@ function DataSize() {
         byte = 0;
     }
 
-    // for test
-    console.log(`byte = ${byte}`);
-
     // byte 값에서 각각의 데이터사이즈 변환
     const result = { ...dispDataSize };
     result.bit = dataSize.byteToBit(byte);
@@ -134,38 +149,34 @@ function DataSize() {
     // 화면 출력
     switch (refSelOut.current.value) {
       case 'bit':
-        refIptOut.current.value = result.bit;
+        procIptOut.current.value = result.bit;
         break;
       case 'B':
-        refIptOut.current.value = result.b;
+        procIptOut.current.value = result.b;
         break;
       case 'KB':
-        refIptOut.current.value = result.kb;
+        procIptOut.current.value = result.kb;
         break;
       case 'MB':
-        refIptOut.current.value = result.mb;
+        procIptOut.current.value = result.mb;
         break;
       case 'GB':
-        refIptOut.current.value = result.gb;
+        procIptOut.current.value = result.gb;
         break;
       case 'TB':
-        refIptOut.current.value = result.tb;
+        procIptOut.current.value = result.tb;
         break;
       case 'PB':
-        refIptOut.current.value = result.pb;
+        procIptOut.current.value = result.pb;
         break;
       case 'EB':
-        refIptOut.current.value = result.eb;
+        procIptOut.current.value = result.eb;
         break;
       default:
-        refIptOut.current.value = 0;
+        procIptOut.current.value = 0;
     }
 
     setDispDataSize(result);
-  };
-
-  const onKeyup = event => {
-    calculate(event.target.id, event.target.value);
   };
 
   const onChange = event => {
@@ -175,61 +186,109 @@ function DataSize() {
   return (
     <article>
       <h1>데이터 사이즈 변환</h1>
-      <div>
-        <input type="number" id="idIn" ref={refInputIn} onKeyUp={onKeyup} />
-        <select
-          id="idSelectIn"
-          ref={refSelectIn}
-          defaultValue={defaultIn}
-          onChange={onChange}
-        >
-          {units.map(unit => (
-            <option key={unit.seq} value={unit.unit}>
-              {unit.name}&nbsp;({unit.unit})
-            </option>
-          ))}
-        </select>
+      <div className={styles.process_wrap}>
+        <div className={styles.input_wrap}>
+          <input
+            type="number"
+            id="idIptIn"
+            className={styles.input}
+            ref={refIptIn}
+            onKeyUp={isNumberValid}
+            onChange={onChange}
+            placeholder="숫자를 입력하세요"
+          />
+        </div>
+        <div className={styles.select_wrap}>
+          <select
+            id="idSelIn"
+            ref={refSelIn}
+            defaultValue={defaultIn}
+            onChange={onChange}
+          >
+            {units.map(unit => (
+              <option key={unit.seq} value={unit.unit}>
+                {unit.name}&nbsp;({unit.unit})
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
-      <div>
-        <input type="number" id="idOut" ref={refInputOut} onKeyUp={onKeyup} />
-        <select
-          id="idSelectOut"
-          ref={refSelectOut}
-          value={defaultOut}
-          onChange={onChange}
-        >
-          {units.map(unit => (
-            <option key={unit.seq} value={unit.unit}>
-              {unit.name}&nbsp;({unit.unit})
-            </option>
-          ))}
-        </select>
+      <div className={styles.result_wrap}>
+        <div className={styles.input_wrap}>
+          <input
+            type="number"
+            id="idIptOut"
+            className={styles.output}
+            ref={refIptOut}
+            onKeyUp={isNumberValid}
+            onChange={onChange}
+            placeholder="결과가 표시됩니다"
+          />
+        </div>
+        <div className={styles.select_wrap}>
+          <select
+            id="idSelOut"
+            ref={refSelOut}
+            defaultValue={defaultOut}
+            onChange={onChange}
+          >
+            {units.map(unit => (
+              <option key={unit.seq} value={unit.unit}>
+                {unit.name}&nbsp;({unit.unit})
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
-      <div>
+      <div className={styles.detail_wrap}>
         <ul>
           <li>
-            {dispDataSize.bit} {units[0].name}&nbsp;({units[0].unit})
+            <span className={styles.num}>{dispDataSize.bit}</span>
+            <span className={styles.text}>
+              {units[0].name}&nbsp;({units[0].unit})
+            </span>
           </li>
           <li>
-            {dispDataSize.b} {units[1].name}&nbsp;({units[1].unit})
+            <span className={styles.num}>{dispDataSize.b}</span>
+            <span className={styles.text}>
+              {units[1].name}&nbsp;({units[1].unit})
+            </span>
           </li>
           <li>
-            {dispDataSize.kb} {units[2].name}&nbsp;({units[2].unit})
+            <span className={styles.num}>{dispDataSize.kb}</span>
+            <span className={styles.text}>
+              {units[2].name}&nbsp;({units[2].unit})
+            </span>
           </li>
           <li>
-            {dispDataSize.mb} {units[3].name}&nbsp;({units[3].unit})
+            <span className={styles.num}>{dispDataSize.mb}</span>
+            <span className={styles.text}>
+              {units[3].name}&nbsp;({units[3].unit})
+            </span>
           </li>
           <li>
-            {dispDataSize.gb} {units[4].name}&nbsp;({units[4].unit})
+            <span className={styles.num}>{dispDataSize.gb}</span>
+            <span className={styles.text}>
+              {units[4].name}&nbsp;({units[4].unit})
+            </span>
           </li>
           <li>
-            {dispDataSize.tb} {units[5].name}&nbsp;({units[5].unit})
+            <span className={styles.num}>{dispDataSize.tb}</span>
+            <span className={styles.text}>
+              {units[5].name}&nbsp;({units[5].unit})
+            </span>
           </li>
           <li>
-            {dispDataSize.pb} {units[6].name}&nbsp;({units[6].unit})
+            <span className={styles.num}>{dispDataSize.pb}</span>
+            <span className={styles.text}>
+              {units[6].name}&nbsp;({units[6].unit})
+            </span>
           </li>
           <li>
-            {dispDataSize.eb} {units[7].name}&nbsp;({units[7].unit})
+            <span className={styles.num}>{dispDataSize.eb}</span>
+            <span className={styles.text}>
+              {units[7].name}&nbsp;({units[7].unit})
+            </span>
           </li>
         </ul>
       </div>
