@@ -1,6 +1,10 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import styles from './assets/css/App.module.css';
+
+import Header from './components/templates/Header';
+import Nav from './components/templates/Nav';
+import Footer from './components/templates/Footer';
 
 import Percent from './pages/Percent';
 import Area from './pages/Area';
@@ -8,37 +12,24 @@ import DataSize from './pages/DataSize';
 import Time from './pages/Time';
 
 function App() {
+  const [isNavOpen, setIsNavOpen] = useState(false);
+
+  // 모바일 네비게이션 토클 이벤트
+  const toggleNav = () => {
+    if (isNavOpen) setIsNavOpen(false);
+    else setIsNavOpen(true);
+  };
+
+  // 모바일 네비게이션 닫기
+  const closeNav = () => {
+    setIsNavOpen(false);
+  };
+
   return (
     <BrowserRouter>
       <div className={styles.app}>
-        <header className={styles.header}>
-          <i className="fa-solid fa-calculator fa-xl" />
-          <h1 className={styles.title}>간편 계산기</h1>
-        </header>
-        <section className={styles.navi_wrap}>
-          <nav className={styles.main_nav}>
-            <ul>
-              <li>
-                <Link to="percent" className={styles.link}>
-                  <i className="fa-solid fa-percent" />
-                  <span className={styles.text}>퍼센트</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="datasize" className={styles.link}>
-                  <i className="fa-solid fa-clone" />
-                  <span className={styles.text}>데이터</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="area" className={styles.link}>
-                  <i className="fa-solid fa-clone" />
-                  <span className={styles.text}>면적</span>
-                </Link>
-              </li>
-            </ul>
-          </nav>
-        </section>
+        <Header toggleNav={toggleNav} />
+        <Nav closeNav={closeNav} isNavOpen={isNavOpen} />
         <section className={styles.body_wrap}>
           <div className={styles.content_wrap}>
             <Routes>
@@ -50,9 +41,7 @@ function App() {
             </Routes>
           </div>
         </section>
-        <footer className={styles.footer}>
-          <p>Copyright 2022 All Reserved</p>
-        </footer>
+        <Footer />
       </div>
     </BrowserRouter>
   );

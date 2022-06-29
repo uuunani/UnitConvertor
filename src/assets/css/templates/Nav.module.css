@@ -1,0 +1,54 @@
+.main_nav {
+  position: fixed;
+  width: 100%;
+  margin-top: 50px;
+  background-color: #000000;
+  transition: all 300ms ease-in-out;
+}
+
+.main_nav ul {
+  display: flex;
+  list-style: none;
+  padding-left: 0.5rem;
+}
+
+.main_nav ul li {
+  width: 80px;
+  margin: 0 4px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.main_nav ul li .link {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.main_nav ul li .link .icon {
+}
+
+.main_nav ul li .link .text {
+  margin-left: 0.5rem;
+}
+
+@media screen and (max-width: 768px) {
+  .main_nav {
+    display: none;
+  }
+
+  .main_nav.open {
+    display: block;
+  }
+
+  .main_nav ul {
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+
+  .main_nav ul li {
+    padding: 0.5rem;
+    width: 100%;
+    text-align: center;
+  }
+}
