@@ -6,28 +6,105 @@ article {
   padding-right: 0.5rem;
 }
 
-.article div label input {
-  background-color: transparent;
-  border: 0.1rem solid #d1d1d1;
-  border-radius: 0.4rem;
+article .process_wrap {
+  margin-top: 0.5rem;
+}
+
+article .process_wrap label {
+  display: inline-block;
+}
+
+article .process_wrap label.lbl_base_amt {
+  width: 70%;
+  font-size: 18px;
+  color: #424242;
+  text-align: right;
+}
+
+article .process_wrap label.lbl_percent {
+  width: 29%;
+  margin-left: 1%;
+  font-size: 18px;
+  color: #424242;
+  text-align: right;
+}
+
+article .result_wrap {
+  margin-top: 0.5rem;
+}
+
+article .result_wrap label.lbl_result {
+  display: inline-block;
+  width: 100%;
+  font-size: 18px;
+  color: #424242;
+  text-align: right;
+}
+
+article input {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  font-size: 32px;
+  text-align: right;
+  padding-right: 0.5rem;
+  border: 0;
+  border-radius: 0.5rem;
   box-shadow: none;
   box-sizing: inherit;
-  height: 2rem;
-  padding: 0.6rem 1rem;
+  -webkit-box-flex: 1;
+  -webkit-appearance: none;
 }
 
-.article div label span.input_text {
-  display: inline-block;
-  width: 120px;
+article .process_wrap label input {
+  color: #000000;
+  background-color: #f5ecbc;
 }
 
-.article div label span.text {
-  display: inline-block;
-  width: 180px;
+article .result_wrap label input {
+  color: #db4242;
+  background-color: #f5ecbc;
 }
 
-.article div label span.warring {
+article .detail_wrap {
+  display: block;
+  margin-top: 1.5rem;
+}
+
+article .detail_wrap ul {
+  padding-left: 0;
+}
+
+article .detail_wrap ul li {
+  width: 100%;
+  text-align: right;
+  color: #424242;
+  font-size: 18px;
+  margin-top: 7px;
+}
+
+article .detail_wrap ul li span.text1 {
+  color: #424242;
+  font-weight: bold;
+}
+
+article .detail_wrap ul li span.text2 {
+  color: #db4242;
+  font-weight: bold;
+}
+
+article .func_wrap {
+  width: 100%;
+  text-align: right;
+}
+
+article .func_wrap button {
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
   display: inline-block;
-  width: 100px;
-  color: red;
+  font-size: 16px;
 }

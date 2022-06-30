@@ -49,6 +49,11 @@ function DataSize() {
     reset.pb = 0;
     reset.eb = 0;
     setDispDataSize(reset);
+
+    refIptIn.current.value = '';
+    refIptOut.current.value = '';
+    refSelIn.current.value = 'MB';
+    refSelOut.current.value = 'GB';
   };
 
   // INPUT 태그 Validation 함수
@@ -296,6 +301,11 @@ function DataSize() {
         </div>
       </div>
       <div className={styles.detail_wrap}>{detailView}</div>
+      <div className={styles.func_wrap}>
+        <button type="button" className={styles.reset_btn} onClick={resetState}>
+          <i className="fa-solid fa-arrow-rotate-left" />
+        </button>
+      </div>
     </article>
   );
 }

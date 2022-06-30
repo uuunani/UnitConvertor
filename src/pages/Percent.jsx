@@ -1,105 +1,144 @@
 import React, { useState, useRef } from 'react';
-
 import styles from '../assets/css/pages/Percent.module.css';
-
 import calc from '../utils/calculate.percent';
 
 function Percent() {
+  const [baseAmt, setBaseAmt] = useState();
+  const [percent, setPercent] = useState();
+  const [resultAmt, setResultAmt] = useState();
+
   const [minusAmt, setMinusAmt] = useState(0);
   const [plusAmt, setPlusAmt] = useState(0);
 
-  const refBaseAmt = useRef();
-  const refPercent = useRef();
-  const refPercentAmt = useRef();
+  const baseAmtRef = useRef();
+  const percentRef = useRef();
+  const resultAmtRef = useRef();
+
+  const resetState = () => {
+    setBaseAmt(0);
+    setPercent(0);
+    setResultAmt(0);
+    setMinusAmt(0);
+    setPlusAmt(0);
+
+    baseAmtRef.current.value = '';
+    percentRef.current.value = '';
+    resultAmtRef.current.value = '';
+  };
 
   // 키업 이벤트
   const onKeyupPercentAmt = () => {
-    let baseAmt = refBaseAmt.current.value;
-    let percent = refPercent.current.value;
+    const cBaseAmt = parseFloat(baseAmtRef.current.value);
+    const cPercent = parseFloat(percentRef.current.value);
 
-    // float 타입으로 변경
-    baseAmt = parseFloat(baseAmt);
-    percent = parseFloat(percent);
+    if (cBaseAmt > 0 && cPercent > 0) {
+      const cResultAmt = calc.percentAmt(cBaseAmt, cPercent);
+      resultAmtRef.current.value = cResultAmt;
 
-    if (baseAmt > 0 && percent > 0) {
-      // 퍼센트금액 계산
-      const percentAmt = calc.percentAmt(baseAmt, percent);
-
-      // 화면 업데이트
-      refPercentAmt.current.value = percentAmt;
-
-      setMinusAmt(calc.minus(baseAmt, percentAmt));
-      setPlusAmt(calc.plus(baseAmt, percentAmt));
+      // state 업데이트
+      setBaseAmt(cBaseAmt);
+      setPercent(cPercent);
+      setResultAmt(cResultAmt);
+      setMinusAmt(calc.minus(cBaseAmt, cResultAmt));
+      setPlusAmt(calc.plus(cBaseAmt, cResultAmt));
     }
   };
 
   // 키업 이벤트
   const onKeyupPercent = () => {
-    const baseAmt = parseFloat(refBaseAmt.current.value);
-    const percentAmt = parseFloat(refPercentAmt.current.value);
+    const cBaseAmt = parseFloat(baseAmtRef.current.value);
+    const cResultAmt = parseFloat(resultAmtRef.current.value);
 
-    if (baseAmt > 0 && percentAmt > 0) {
+    if (cBaseAmt > 0 && cResultAmt > 0) {
       // 퍼센트 계산
-      const percent = calc.percent(baseAmt, percentAmt);
+      const cPercent = calc.percent(cBaseAmt, cResultAmt);
+      percentRef.current.value = cPercent;
 
-      // 화면 업데이트
-      refPercent.current.value = percent;
-      setMinusAmt(calc.minus(baseAmt, percentAmt));
-      setPlusAmt(calc.plus(baseAmt, percentAmt));
+      // state 업데이트
+      setBaseAmt(cBaseAmt);
+      setPercent(cPercent);
+      setResultAmt(cResultAmt);
+      setMinusAmt(calc.minus(cBaseAmt, cResultAmt));
+      setPlusAmt(calc.plus(cBaseAmt, cResultAmt));
     }
   };
 
+  let detailView = null;
+  if ((baseAmt > 0 && percent > 0) || (baseAmt > 0 && resultAmt > 0)) {
+    detailView = (
+      <ul>
+        <li>
+          <span className={styles.text1}>
+            {parseFloat(baseAmt)}의 {parseFloat(percent)}% 는{' '}
+          </span>{' '}
+          <span className={styles.text2}>{parseFloat(resultAmt)}</span>
+          <span className={styles.text1}>입니다</span>
+        </li>
+        <li>
+          <span className={styles.text1}>
+            {parseFloat(baseAmt)}
+            에서 {parseFloat(percent)}% 만큼 증가한 값은&nbsp;
+          </span>
+          <span className={styles.text2}>{parseFloat(plusAmt)}</span>
+        </li>
+        <li>
+          <span className={styles.text1}>
+            {parseFloat(baseAmt)}
+            에서 {parseFloat(percent)}% 만큼 감소한 값은&nbsp;
+          </span>
+          <span className={styles.text2}>{parseFloat(minusAmt)}</span>
+        </li>
+      </ul>
+    );
+  }
+
   return (
     <article className={styles.article}>
-      <div>
-        <br />
-        <label htmlFor="idBaseAmt">
-          <span className={styles.input_text}>전체값</span>
+      <div className={styles.process_wrap}>
+        <label className={styles.lbl_base_amt} htmlFor="idBaseAmt">
+          <span className={styles.text}>전체값</span>
           <input
             type="number"
             id="idBaseAmt"
-            ref={refBaseAmt}
+            ref={baseAmtRef}
             onKeyUp={onKeyupPercentAmt}
+            onChange={() => {
+              setBaseAmt(baseAmtRef.current.value);
+            }}
           />
         </label>
-        <br />
-        <br />
-        <label htmlFor="idPercent">
-          <span className={styles.input_text}>비율 (%)</span>
+        <label className={styles.lbl_percent} htmlFor="idPercent">
+          <span className={styles.text}>비율 (%)</span>
           <input
             type="number"
             id="idPercent"
-            ref={refPercent}
+            ref={percentRef}
             onKeyUp={onKeyupPercentAmt}
+            onChange={() => {
+              setPercent(percentRef.current.value);
+            }}
           />
         </label>
-        <br />
-        <br />
-        <label htmlFor="idPercentAmt">
-          <span className={styles.input_text}>계산값</span>
+      </div>
+      <div className={styles.result_wrap}>
+        <label className={styles.lbl_result} htmlFor="idResultAmt">
+          <span className={styles.text}>결과값</span>
           <input
             type="number"
-            ref={refPercentAmt}
-            id="idPercentAmt"
+            id="idResultAmt"
+            ref={resultAmtRef}
             onKeyUp={onKeyupPercent}
+            onChange={() => {
+              setResultAmt(resultAmtRef.current.value);
+            }}
           />
         </label>
-        <br />
-        <br />
-        <label htmlFor="idMinusAmt">
-          <span className={styles.text}>비율(%)만큼 감소한 값</span>
-          <span id="idMinusAmt">
-            {minusAmt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-          </span>
-        </label>
-        <br />
-        <br />
-        <label htmlFor="idPlusAmt">
-          <span className={styles.text}>비율(%)만큼 증가한 값</span>
-          <span id="idPlusAmt">
-            {plusAmt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-          </span>
-        </label>
+      </div>
+      <div className={styles.detail_wrap}>{detailView}</div>
+      <div className={styles.func_wrap}>
+        <button type="button" className={styles.reset_btn} onClick={resetState}>
+          <i className="fa-solid fa-arrow-rotate-left" />
+        </button>
       </div>
     </article>
   );
