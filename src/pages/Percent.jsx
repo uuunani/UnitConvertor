@@ -26,8 +26,8 @@ function Percent() {
     resultAmtRef.current.value = '';
   };
 
-  // 키업 이벤트
-  const onKeyupPercentAmt = () => {
+  // 전체값 인풋 키업 이벤트
+  const onKeyupBaseAmt = () => {
     const cBaseAmt = parseFloat(baseAmtRef.current.value);
     const cPercent = parseFloat(percentRef.current.value);
 
@@ -44,7 +44,7 @@ function Percent() {
     }
   };
 
-  // 키업 이벤트
+  // 퍼센트 인풋 키업 이벤트
   const onKeyupPercent = () => {
     const cBaseAmt = parseFloat(baseAmtRef.current.value);
     const cResultAmt = parseFloat(resultAmtRef.current.value);
@@ -101,10 +101,11 @@ function Percent() {
             type="number"
             id="idBaseAmt"
             ref={baseAmtRef}
-            onKeyUp={onKeyupPercentAmt}
+            onKeyUp={onKeyupBaseAmt}
             onChange={() => {
               setBaseAmt(baseAmtRef.current.value);
             }}
+            placeholder="전체값 100의"
           />
         </label>
         <label className={styles.lbl_percent} htmlFor="idPercent">
@@ -113,10 +114,11 @@ function Percent() {
             type="number"
             id="idPercent"
             ref={percentRef}
-            onKeyUp={onKeyupPercentAmt}
+            onKeyUp={onKeyupBaseAmt}
             onChange={() => {
               setPercent(percentRef.current.value);
             }}
+            placeholder="10% 는"
           />
         </label>
       </div>
@@ -131,6 +133,7 @@ function Percent() {
             onChange={() => {
               setResultAmt(resultAmtRef.current.value);
             }}
+            placeholder="10 입니다"
           />
         </label>
       </div>

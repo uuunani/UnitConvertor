@@ -104,12 +104,6 @@ input::-webkit-inner-spin-button {
   width: 100%;
 }
 
-article .output_wrap select {
-}
-
-article .output_wrap select option {
-}
-
 article .func_wrap {
   width: 100%;
   text-align: right;
