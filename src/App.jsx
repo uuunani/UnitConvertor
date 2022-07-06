@@ -10,6 +10,7 @@ import Percent from './pages/Percent';
 import Area from './pages/Area';
 import DataSize from './pages/DataSize';
 import Time from './pages/Time';
+import DataSpeed from './pages/DataSpeed';
 
 function App() {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -38,6 +39,7 @@ function App() {
               <Route path="area" element={<Area />} />
               <Route path="datasize" element={<DataSize />} />
               <Route path="time" element={<Time />} />
+              <Route path="dataspeed" element={<DataSpeed />} />
             </Routes>
           </div>
         </section>

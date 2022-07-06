@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
 
-import styles from '../assets/css/pages/Area.module.css';
-
 import area from '../utils/calculate.area';
+
+import styles from '../assets/css/pages/Area.module.css';
 
 function Area() {
   const defaultIn = 'm²';
@@ -60,14 +60,19 @@ function Area() {
     reset.danbo = 0;
     reset.jeongbo = 0;
     setDispAreaSize(reset);
+
+    refIptIn.current.value = '';
+    refIptOut.current.value = '';
+    refSelIn.current.value = 'm²';
+    refSelOut.current.value = '평';
   };
 
   // INPUT 태그 Validation 함수
   const isNumberValid = event => {
     const inputVal = event.target.value;
 
-    // 소수점 여섯자리수까지만 입력 허용
-    const regexp = /^\d*(\.\d{0,6})?$/;
+    // 소수점 다섯자리수까지만 입력 허용
+    const regexp = /^\d*(\.\d{0,5})?$/;
     if (inputVal.search(regexp) === -1) {
       if (event.target.id === 'idIptIn') {
         refIptIn.current.value = inputVal.substr(0, inputVal.length - 1);
@@ -161,7 +166,7 @@ function Area() {
         procIptIn.current.value = 0;
     }
 
-    // 제곱미터 값에서 각각의 데이터사이즈 변환
+    // 제곱미터 값에서 각각의 면적 변환
     const result = { ...dispAreaSize };
     result.m2 = m2;
     result.a = area.m2ToA(m2);
@@ -225,8 +230,7 @@ function Area() {
     calculate(event.target.id);
   };
 
-  // 값이 비었을 때 입력필드에 0 출력
-  // input 태그 validation 함수
+  // TODO: 값이 비었을 때 입력필드에 0 출력
 
   let detailView = null;
   if (dispAreaSize.m2 > 0) {
@@ -268,7 +272,10 @@ function Area() {
             defaultValue={defaultIn}
           >
             {units.map(unit => (
-              <option key={unit.seq} value={unit.unit ? unit.unit : unit.name}>
+              <option
+                key={unit.seq}
+                value={unit.unit !== null ? unit.unit : unit.name}
+              >
                 {unit.unit !== null ? `${unit.name} (${unit.unit})` : unit.name}
               </option>
             ))}
@@ -295,7 +302,10 @@ function Area() {
             defaultValue={defaultOut}
           >
             {units.map(unit => (
-              <option key={unit.seq} value={unit.unit ? unit.unit : unit.name}>
+              <option
+                key={unit.seq}
+                value={unit.unit !== null ? unit.unit : unit.name}
+              >
                 {unit.unit !== null ? `${unit.name} (${unit.unit})` : unit.name}
               </option>
             ))}
@@ -303,6 +313,11 @@ function Area() {
         </div>
       </div>
       <div className={styles.detail_wrap}>{detailView}</div>
+      <div className={styles.func_wrap}>
+        <button type="button" className={styles.reset_btn} onClick={resetState}>
+          <i className="fa-solid fa-arrow-rotate-left" />
+        </button>
+      </div>
     </article>
   );
 }
