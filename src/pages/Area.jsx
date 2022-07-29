@@ -63,8 +63,8 @@ function Area() {
 
     refIptIn.current.value = '';
     refIptOut.current.value = '';
-    refSelIn.current.value = 'm²';
-    refSelOut.current.value = '평';
+    refSelIn.current.value = defaultIn;
+    refSelOut.current.value = defaultOut;
   };
 
   // INPUT 태그 Validation 함수
