@@ -66,8 +66,8 @@ function DataSpeed() {
 
     refIptIn.current.value = '';
     refIptOut.current.value = '';
-    refSelIn.current.value = 'bit/s';
-    refSelOut.current.value = 'kbit/s';
+    refSelIn.current.value = defaultIn;
+    refSelOut.current.value = defaultOut;
   };
 
   // INPUT 태그 Validation 함수

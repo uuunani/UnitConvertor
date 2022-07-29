@@ -9,8 +9,8 @@ import Footer from './components/templates/Footer';
 import Percent from './pages/Percent';
 import Area from './pages/Area';
 import DataSize from './pages/DataSize';
-import Time from './pages/Time';
 import DataSpeed from './pages/DataSpeed';
+import Time from './pages/Time';
 
 /*
   TODO:
@@ -52,8 +52,8 @@ function App() {
               <Route path="percent" element={<Percent />} />
               <Route path="area" element={<Area />} />
               <Route path="datasize" element={<DataSize />} />
-              <Route path="time" element={<Time />} />
               <Route path="dataspeed" element={<DataSpeed />} />
+              <Route path="time" element={<Time />} />
             </Routes>
           </div>
         </section>

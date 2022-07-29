@@ -32,6 +32,12 @@ function Nav({ closeNav, isNavOpen }) {
             <span className={styles.text}>데이터 전송 속도</span>
           </Link>
         </li>
+        <li>
+          <Link to="time" onClick={closeNav} className={styles.link}>
+            <i className="fa-solid fa-clone" />
+            <span className={styles.text}>시간</span>
+          </Link>
+        </li>
       </ul>
     </nav>
   );

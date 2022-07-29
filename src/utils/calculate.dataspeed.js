@@ -1,39 +1,39 @@
 export default {
-  kbitToBit: bit => {
-    return bit * 1000;
+  kbitToBit: kbit => {
+    return kbit * 1000;
   },
-  kbToBit: bit => {
-    return bit * 8000;
+  kbToBit: kb => {
+    return kb * 8000;
   },
-  kibitToBit: bit => {
-    return bit * 1024;
+  kibitToBit: kibit => {
+    return kibit * 1024;
   },
-  mbitToBit: bit => {
-    return bit * 1e6;
+  mbitToBit: mbit => {
+    return mbit * 1e6;
   },
-  mbToBit: bit => {
-    return bit * 8e6;
+  mbToBit: mb => {
+    return mb * 8e6;
   },
-  mibitToBit: bit => {
-    return bit * 1.049e6;
+  mibitToBit: mibit => {
+    return mibit * 1.049e6;
   },
-  gbitToBit: bit => {
-    return bit * 1e9;
+  gbitToBit: gbit => {
+    return gbit * 1e9;
   },
-  gbToBit: bit => {
-    return bit * 8e9;
+  gbToBit: gb => {
+    return gb * 8e9;
   },
-  gibitToBit: bit => {
-    return bit * 1.074e9;
+  gibitToBit: gibit => {
+    return gibit * 1.074e9;
   },
-  tbitToBit: bit => {
-    return bit * 1e12;
+  tbitToBit: tbit => {
+    return tbit * 1e12;
   },
-  tbToBit: bit => {
-    return bit * 8e12;
+  tbToBit: tb => {
+    return tb * 8e12;
   },
-  tibitToBit: bit => {
-    return bit * 1.1e12;
+  tibitToBit: tibit => {
+    return tibit * 1.1e12;
   },
   bitToKbit: bit => {
     return parseFloat((bit / 1000).toExponential(4));
